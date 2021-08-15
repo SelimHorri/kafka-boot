@@ -17,7 +17,7 @@ import com.selimhorri.app.model.Message;
 @Configuration
 public class KafkaConfig {
 	
-	private static final Object KAFKA_HOSTNAME = "localhost:9092";
+	private static final String KAFKA_HOSTNAME = "localhost:9092";
 	
 	@Bean
 	public ProducerFactory<String, Message> getJsonProducerFactory() {
