@@ -8,10 +8,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.selimhorri.app.model.Message;
+
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping(value = {"/employees"})
+@RequestMapping(value = {"/messages"})
 @RequiredArgsConstructor
 public class EmployeeResource {
 	
@@ -19,9 +21,9 @@ public class EmployeeResource {
 	private final KafkaTemplate<String, String> kafkaTemplate;
 	
 	@GetMapping(value = {"/msg/{msg}"})
-	public ResponseEntity<String> publish(@PathVariable("msg") final String msg) {
+	public ResponseEntity<Message> publish(@PathVariable("msg") final String msg) {
 		this.kafkaTemplate.send(TOPIC, msg);
-		return new ResponseEntity<>("Published successfully ! \n msg: " + msg, HttpStatus.OK);
+		return new ResponseEntity<>(new Message("Published successfully ! \n msg: " + msg), HttpStatus.OK);
 	}
 	
 	
