@@ -22,10 +22,7 @@ public class MessageResource {
 	
 	@GetMapping(value = {"/publish/{msg}"})
 	public ResponseEntity<Message> publish(@PathVariable("msg") final String msg) {
-		
-		final Message message = new Message(msg);
-		this.kafkaTemplate.send(TOPIC, message);
-		
+		this.kafkaTemplate.send(TOPIC, new Message(msg));
 		return new ResponseEntity<>(new Message("Published successfully ! \n msg: " + msg), HttpStatus.OK);
 	}
 	
