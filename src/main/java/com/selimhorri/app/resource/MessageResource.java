@@ -15,14 +15,17 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping(value = {"/messages"})
 @RequiredArgsConstructor
-public class EmployeeResource {
+public class MessageResource {
 	
 	private static final String TOPIC = "NewTopic";
-	private final KafkaTemplate<String, String> kafkaTemplate;
+	private final KafkaTemplate<String, Message> kafkaTemplate;
 	
-	@GetMapping(value = {"/msg/{msg}"})
+	@GetMapping(value = {"/publish/{msg}"})
 	public ResponseEntity<Message> publish(@PathVariable("msg") final String msg) {
-		this.kafkaTemplate.send(TOPIC, msg);
+		
+		final Message message = new Message(msg);
+		this.kafkaTemplate.send(TOPIC, message);
+		
 		return new ResponseEntity<>(new Message("Published successfully ! \n msg: " + msg), HttpStatus.OK);
 	}
 	
