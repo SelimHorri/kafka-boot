@@ -1,12 +1,14 @@
 package com.selimhorri.app.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 
-@RequiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class Message {
 	
-	private final String msg;
+	private String msg;
 	
 }
