@@ -1,4 +1,4 @@
-# KafkaBoot
+# kafka-boot
 ## kafka-producer-consumer-with-spring-boot
 
 Simple Spring Boot app to consume the published message into a Kafka topic through a simple Rest API:
