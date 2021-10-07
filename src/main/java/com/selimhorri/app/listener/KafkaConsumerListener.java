@@ -1,6 +1,7 @@
 package com.selimhorri.app.listener;
 
 import org.springframework.stereotype.Component;
+import org.springframework.kafka.annotation.KafkaListener;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -17,7 +18,7 @@ public class KafkaConsumerListener {
 	
 	private final ObjectMapper objectMapper;
 	
-	@org.springframework.kafka.annotation.KafkaListener(topics = {"NewTopic"}, groupId = "group_id")
+	@KafkaListener(topics = {"NewTopic"}, groupId = "group_id")
 	public void consume(final String messageString) throws JsonMappingException, JsonProcessingException {
 		final Message message = this.objectMapper.readValue(messageString.toString(), Message.class);
 		System.err.println(message);
